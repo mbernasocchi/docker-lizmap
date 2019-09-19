@@ -5,6 +5,8 @@ services:
       context: .
       args:
         lizmap_version: 3.3.0
+        LE_domain: 'example.com'
+        LE_email: 'info@example.com'
     #image: "opengisch/docker-lizmap:3.3"
     restart: on-failure
     ports:

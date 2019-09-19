@@ -56,6 +56,19 @@ RUN mkdir -p /io/data/
 VOLUME  ["/var/www/lizmap/var" , "/io"]
 EXPOSE 80 443
 
+
+RUN apt-get -y update \
+    && apt-get install -y software-properties-common \
+    && add-apt-repository -y universe \
+    && add-apt-repository -y ppa:certbot/certbot \
+    && apt-get update \
+    && apt-get install -y certbot python-certbot-apache
+
+ARG LE_domain="example.com"
+ARG LE_email="info@example.com"
+ENV LE_domain=$LE_domain
+ENV LE_email=$LE_email
+
 COPY conf/docker-entrypoint.sh /usr/local/bin/
 #RUN chmod u+x /bin/docker-entrypoint.sh
 CMD ["docker-entrypoint.sh"]
